@@ -15,12 +15,16 @@ document.addEventListener('DOMContentLoaded', function () {
         },
     });
 });
-document.getElementById('fullscreen-btn').addEventListener('click', function () {
-    if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-    } else {
-        if (document.exitFullscreen) {
-            document.exitFullscreen();
+document.querySelectorAll('.swiper-slide img').forEach(img => {
+    img.addEventListener('click', function() {
+        if (img.requestFullscreen) {
+            img.requestFullscreen();
+        } else if (img.mozRequestFullScreen) { // Firefox
+            img.mozRequestFullScreen();
+        } else if (img.webkitRequestFullscreen) { // Chrome, Safari and Opera
+            img.webkitRequestFullscreen();
+        } else if (img.msRequestFullscreen) { // IE/Edge
+            img.msRequestFullscreen();
         }
-    }
+    });
 });
